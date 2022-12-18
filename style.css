@@ -1,0 +1,47 @@
+html,
+body {
+  margin: 0;
+}
+
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.gameArea {
+  /* display: grid; */
+  width: 60vw;
+  height: 60vh;
+}
+
+.row1,
+.row2,
+.row3 {
+  height: 33%;
+  width: 100%;
+}
+.box1 {
+  border: 1px solid red;
+  width: 33%;
+  height: 100%;
+}
+
+.box2 {
+  border-right: 1px solid red;
+}
+
+.box3 {
+  border-right: 1px solid red;
+}
+.box4 {
+  border-right: 1px solid red;
+}
+
+.box5 {
+  border-right: 1px solid red;
+}
+
+.box6 {
+  border-right: 1px solid red;
+}
