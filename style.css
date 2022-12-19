@@ -7,41 +7,48 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
+  height: 100vh;
 }
 
 .gameArea {
-  /* display: grid; */
-  width: 60vw;
-  height: 60vh;
+  display: grid;
+  width: 320px;
+  height: 320px;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
 }
 
-.row1,
-.row2,
-.row3 {
-  height: 33%;
-  width: 100%;
-}
-.box1 {
+.box {
   border: 1px solid red;
-  width: 33%;
-  height: 100%;
 }
 
-.box2 {
-  border-right: 1px solid red;
+.box1,
+.box4,
+.box7 {
+  border-left: none;
 }
 
+.box1,
+.box2,
 .box3 {
-  border-right: 1px solid red;
-}
-.box4 {
-  border-right: 1px solid red;
+  border-top: none;
 }
 
-.box5 {
-  border-right: 1px solid red;
+.box3,
+.box6,
+.box9 {
+  border-right: none;
 }
 
-.box6 {
-  border-right: 1px solid red;
+.box7,
+.box8,
+.box9 {
+  border-bottom: none;
+}
+
+.box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 80px;
 }

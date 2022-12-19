@@ -6,24 +6,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Tic-tac-toe</title>
     <link rel="stylesheet" href="style.css" />
-    <script src="app.js"></script>
+    <script src="app.js" defer></script>
   </head>
   <body>
     <div class="gameArea">
-      <div class="row1">
-        <div class="box1"></div>
-        <div class="box2"></div>
-        <div class="box3"></div>
-      </div>
-      <div class="row2">
-        <div class="box4"></div>
-        <div class="box5"></div>
-        <div class="box6"></div>
-      </div>
-      <div class="row3">
-        <div class="box7"></div>
-        <div class="box8"></div>
-        <div class="box9"></div>
+      <div class="box box1" data-row="0" data-index="0"></div>
+      <div class="box box2" data-row="0" data-index="1"></div>
+      <div class="box box3" data-row="0" data-index="2"></div>
+      <div class="box box4" data-row="1" data-index="0"></div>
+      <div class="box box5" data-row="1" data-index="1"></div>
+      <div class="box box6" data-row="1" data-index="2"></div>
+      <div class="box box7" data-row="2" data-index="0"></div>
+      <div class="box box8" data-row="2" data-index="1"></div>
+      <div class="box box9" data-row="2" data-index="2"></div>
+
       </div>
     </div>
   </body>
