@@ -5,17 +5,25 @@ let gameBoard = (() => {
     ["", "", ""],
   ];
 
+  let getGameArea = () => {
+    return gameArea;
+  };
+  let test = "test";
+
   let _randomValue = "la di da di";
 
-  let resetArea = function () {
+  let resetArea = () => {
+    // debugger;
+    console.log(gameArea);
     gameArea = [
-      [, , ,],
-      [, , ,],
-      [, , ,],
+      ["", "", ""],
+      ["", "", ""],
+      ["", "", ""],
     ];
+    displayController.populateBoxes();
   };
 
-  return { gameArea, resetArea };
+  return { getGameArea, resetArea };
 })();
 
 // console.log(gameBoard.gameArea);
@@ -24,82 +32,90 @@ let gameFlow = (() => {
   let whosTurn = "x";
   // debugger;
   let method = "";
+  let win = "false";
+  let winner = "";
+  // let random = "AAAAAAAAAAA";
 
   let getWhosTurn = () => {
     return whosTurn;
   };
-  function checkForWinner() {
-    let win = false;
-    let winner = "";
-
-    function checkRows() {
-      for (row in gameBoard.gameArea) {
-        if ((row = ["x", "x", "x"])) {
-          win = true;
-          winner = "x";
+  let checkForWinner = () => {
+    // debugger;
+    // this.random = "bbbbbbbbbbbbb";
+    let checkRows = () => {
+      for (row in gameBoard.getGameArea()) {
+        if (
+          JSON.stringify(gameBoard.getGameArea()[row]) ==
+          JSON.stringify(["x", "x", "x"])
+        ) {
+          this.win = true;
+          this.winner = "x";
+          return;
         }
-        if ((row = ["o", "o", "o"])) {
-          win = true;
-          winner = "o";
-          console.log("here");
+        if (
+          JSON.stringify(gameBoard.getGameArea()[row]) ==
+          JSON.stringify(["o", "o", "o"])
+        ) {
+          this.win = true;
+          this.winner = "o";
+          prototype;
+          return;
         }
       }
-    }
+    };
 
-    function checkCollumns() {
+    let checkCollumns = () => {
       // debugger;
-      for (let colIndex = 0; colIndex < 3; colIndex++) {
-        for (let rowIndex = 0; rowIndex < 3; rowIndex++) {
-          let collumn =
-            gameBoard.gameArea[colIndex][rowIndex] +
-            gameBoard.gameArea[colIndex][rowIndex] +
-            gameBoard.gameArea[colIndex][rowIndex];
+      for (let rowIndex = 0; rowIndex < 3; rowIndex++) {
+        let collumn =
+          gameBoard.getGameArea()[0][rowIndex] +
+          gameBoard.getGameArea()[1][rowIndex] +
+          gameBoard.getGameArea()[2][rowIndex];
 
-          console.log("the collumn", collumn);
-          if (collumn == "xxx") {
-            win = true;
-            winner = "x";
-            method = "collumn";
-          }
-          if (collumn === "ooo") {
-            win = true;
-            winner = "o";
-            console.log("here");
-            method = "collumn";
-          }
+        if (collumn == "xxx") {
+          this.win = true;
+          this.winner = "x";
+          method = "collumn";
+        }
+        if (collumn === "ooo") {
+          this.win = true;
+          this.winner = "o";
+          method = "collumn";
         }
       }
-    }
+    };
+
+    let checkDiagonals = () => {
+      let firstDiagonal =
+        gameBoard.getGameArea()[0][0] +
+        gameBoard.getGameArea()[1][1] +
+        gameBoard.getGameArea()[2][2];
+      let secondDiagonal =
+        gameBoard.getGameArea()[2][0] +
+        gameBoard.getGameArea()[1][1] +
+        gameBoard.getGameArea()[0][2];
+
+      if (firstDiagonal === "xxx" || secondDiagonal === "xxx") {
+        this.win = true;
+        this.winner = "x";
+      }
+      if (firstDiagonal === "ooo" || secondDiagonal === "ooo") {
+        this.win = true;
+        this.winner = "o";
+      }
+    };
+    checkRows();
     checkCollumns();
+    checkDiagonals();
 
-    let firstDiagonal =
-      gameBoard.gameArea[0][0] +
-      gameBoard.gameArea[1][1] +
-      gameBoard.gameArea[2][2];
-    let secondDiagonal =
-      gameBoard.gameArea[2][0] +
-      gameBoard.gameArea[1][1] +
-      gameBoard.gameArea[0][2];
-
-    if (firstDiagonal === "xxx" || secondDiagonal === "xxx") {
-      win = true;
-      winner = "x";
+    if (this.win == true) {
+      alert(`The winner is ${this.winner}`);
     }
-    if (firstDiagonal === "ooo" || secondDiagonal === "ooo") {
-      win = true;
-      winner = "o";
-      console.log("here");
-    }
-    if (win) {
-      alert(`The winner is ${winner}`);
-    }
-    console.log("firstDiagonal", firstDiagonal);
-    console.log("secondDiagonal", secondDiagonal);
-    return { win: win, winner: winner };
-  }
+  };
 
   let changeTurn = () => {
     whosTurn = whosTurn == "x" ? "o" : "x";
+    console.log(whosTurn);
   };
 
   return { getWhosTurn, changeTurn, checkForWinner };
@@ -131,14 +147,14 @@ let displayController = (() => {
   // }
 
   function populateGameArray(row, index, content) {
-    gameBoard.gameArea[row][index] = content;
+    gameBoard.getGameArea()[row][index] = content;
   }
 
   function populateBoxes() {
     boxesDivs.forEach((aBoxDiv) => {
       let row = aBoxDiv.dataset.row;
       let index = aBoxDiv.dataset.index;
-      aBoxDiv.textContent = gameBoard.gameArea[row][index];
+      aBoxDiv.textContent = gameBoard.getGameArea()[row][index];
       // populateGameArea(row, index);
     });
   }
