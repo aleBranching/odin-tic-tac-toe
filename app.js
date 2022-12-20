@@ -34,6 +34,9 @@ let gameFlow = (() => {
   let method = "";
   let win = "false";
   let winner = "";
+  let getWinStatus = () => {
+    return win;
+  };
   // let random = "AAAAAAAAAAA";
 
   let getWhosTurn = () => {
@@ -50,6 +53,8 @@ let gameFlow = (() => {
         ) {
           this.win = true;
           this.winner = "x";
+          win = true;
+
           return;
         }
         if (
@@ -58,7 +63,9 @@ let gameFlow = (() => {
         ) {
           this.win = true;
           this.winner = "o";
-          prototype;
+          win = true;
+
+          // prototype;
           return;
         }
       }
@@ -76,11 +83,13 @@ let gameFlow = (() => {
           this.win = true;
           this.winner = "x";
           method = "collumn";
+          win = true;
         }
         if (collumn === "ooo") {
           this.win = true;
           this.winner = "o";
           method = "collumn";
+          win = true;
         }
       }
     };
@@ -98,10 +107,12 @@ let gameFlow = (() => {
       if (firstDiagonal === "xxx" || secondDiagonal === "xxx") {
         this.win = true;
         this.winner = "x";
+        win = true;
       }
       if (firstDiagonal === "ooo" || secondDiagonal === "ooo") {
         this.win = true;
         this.winner = "o";
+        win = true;
       }
     };
     checkRows();
@@ -118,7 +129,7 @@ let gameFlow = (() => {
     console.log(whosTurn);
   };
 
-  return { getWhosTurn, changeTurn, checkForWinner };
+  return { getWhosTurn, changeTurn, checkForWinner, getWinStatus };
 })();
 
 let players = (symbol) => {
@@ -162,7 +173,7 @@ let displayController = (() => {
   function clickBoxes() {
     boxesDivs.forEach((aBoxDiv) => {
       aBoxDiv.addEventListener("click", () => {
-        if (aBoxDiv.textContent !== "") {
+        if (aBoxDiv.textContent !== "" || gameFlow.getWinStatus() == true) {
           return;
         }
         let row = aBoxDiv.dataset.row;
